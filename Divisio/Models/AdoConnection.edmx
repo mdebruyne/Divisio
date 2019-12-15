@@ -576,7 +576,7 @@
             <PropertyRef Name="IdLand" />
           </Key>
           <Property Name="IdLand" Type="Int32" Nullable="false" />
-          <Property Name="land1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="LandNaam" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="provincie" Relationship="Self.FK_Provincie_Land" FromRole="land" ToRole="provincie" />
         </EntityType>
         <EntityType Name="lening">
@@ -609,7 +609,7 @@
             <PropertyRef Name="Idprovincie" />
           </Key>
           <Property Name="Idprovincie" Type="Int32" Nullable="false" />
-          <Property Name="Provincie1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProvincieNaam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Land_IdLand" Type="Int32" />
           <NavigationProperty Name="land" Relationship="Self.FK_Provincie_Land" FromRole="provincie" ToRole="land" />
           <NavigationProperty Name="postcodeGemeente" Relationship="Self.FK_PostcodeGemeente_Provincie" FromRole="provincie" ToRole="postcodeGemeente" />
@@ -970,7 +970,7 @@
             <EntityTypeMapping TypeName="DivisioModel.land">
               <MappingFragment StoreEntitySet="land">
                 <ScalarProperty Name="IdLand" ColumnName="IdLand" />
-                <ScalarProperty Name="land1" ColumnName="land" />
+                <ScalarProperty Name="LandNaam" ColumnName="land" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1001,7 +1001,7 @@
             <EntityTypeMapping TypeName="DivisioModel.provincie">
               <MappingFragment StoreEntitySet="provincie">
                 <ScalarProperty Name="Idprovincie" ColumnName="Idprovincie" />
-                <ScalarProperty Name="Provincie1" ColumnName="Provincie" />
+                <ScalarProperty Name="ProvincieNaam" ColumnName="Provincie" />
                 <ScalarProperty Name="Land_IdLand" ColumnName="Land_IdLand" />
               </MappingFragment>
             </EntityTypeMapping>

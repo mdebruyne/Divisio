@@ -21,7 +21,7 @@ namespace Divisio.Models
         }
     
         public int Idprovincie { get; set; }
-        public string Provincie1 { get; set; }
+        public string ProvincieNaam { get; set; }
         public Nullable<int> Land_IdLand { get; set; }
     
         public virtual land land { get; set; }

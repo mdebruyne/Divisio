@@ -21,7 +21,7 @@ namespace Divisio.Models
         }
     
         public int IdLand { get; set; }
-        public string land1 { get; set; }
+        public string LandNaam { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<provincie> provincie { get; set; }

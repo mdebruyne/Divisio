@@ -121,6 +121,7 @@
       <DependentUpon>AdoConnection.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LandModel.cs" />
+    <Compile Include="Models\LandService.cs" />
     <Compile Include="Models\lening.cs">
       <DependentUpon>AdoConnection.tt</DependentUpon>
     </Compile>
@@ -128,10 +129,12 @@
       <DependentUpon>AdoConnection.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PostcodeGemeenteModel.cs" />
+    <Compile Include="Models\PostcodeGemeenteService.cs" />
     <Compile Include="Models\provincie.cs">
       <DependentUpon>AdoConnection.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProvincieModel.cs" />
+    <Compile Include="Models\ProvincieService.cs" />
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>AdoConnection.tt</DependentUpon>
     </Compile>
@@ -142,7 +145,10 @@
     <Compile Include="Models\users.cs">
       <DependentUpon>AdoConnection.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserService.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\LandViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Views\Login_Window.xaml.cs">
       <DependentUpon>Login_Window.xaml</DependentUpon>
     </Compile>

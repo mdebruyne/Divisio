@@ -148,6 +148,8 @@
     <Compile Include="Models\UserService.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\LandViewModel.cs" />
+    <Compile Include="ViewModels\PostcodeGemeenteViewModel.cs" />
+    <Compile Include="ViewModels\ProvincieViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Views\Login_Window.xaml.cs">
       <DependentUpon>Login_Window.xaml</DependentUpon>

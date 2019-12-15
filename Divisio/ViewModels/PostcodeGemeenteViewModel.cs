@@ -10,7 +10,7 @@ using System.Collections.ObjectModel;
 
 namespace Divisio.ViewModels
 {
-    public class LandViewModel : INotifyPropertyChanged
+    public class PostcodeGemeenteViewModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged_Implementation
         public event PropertyChangedEventHandler PropertyChanged;
@@ -21,12 +21,12 @@ namespace Divisio.ViewModels
         }
         #endregion
 
-        LandService ObjLandService;
-        public LandViewModel()
+        PostcodeGemeenteService ObjPostcodeGemeenteService;
+        public PostcodeGemeenteViewModel()
         {
-            ObjLandService = new LandService();
+            ObjPostcodeGemeenteService = new PostcodeGemeenteService();
             LoadData();
-            CurrentLand = new LandModel();
+            CurrentPostcodeGemeente = new PostcodeGemeenteModel();
             saveCommand = new RelayCommand(Save);
             searchCommand = new RelayCommand(Search);
             updateCommand = new RelayCommand(Update);
@@ -41,24 +41,24 @@ namespace Divisio.ViewModels
         }
 
         #region DisplayOperation
-        private ObservableCollection<LandModel> landList;
-        public ObservableCollection<LandModel> LandList
+        private ObservableCollection<PostcodeGemeenteModel> postcodeGemeenteList;
+        public ObservableCollection<PostcodeGemeenteModel> PostcodeGemeenteList
         {
-            get { return landList; }
-            set { landList = value; OnPropertyChanged("LandList"); }
+            get { return postcodeGemeenteList; }
+            set { postcodeGemeenteList = value; OnPropertyChanged("PostcodeGemeenteList"); }
         }
         private void LoadData()
         {
-            LandList = new ObservableCollection<LandModel>(ObjLandService.GetAll());
+            PostcodeGemeenteList = new ObservableCollection<PostcodeGemeenteModel>(ObjPostcodeGemeenteService.GetAll());
         }
         #endregion
 
         #region SaveOperation
-        private LandModel currentLand;
-        public LandModel CurrentLand
+        private PostcodeGemeenteModel currentPostcodeGemeente;
+        public PostcodeGemeenteModel CurrentPostcodeGemeente
         {
-            get { return currentLand; }
-            set { currentLand = value; OnPropertyChanged("CurrentLand"); }
+            get { return currentPostcodeGemeente; }
+            set { currentPostcodeGemeente = value; OnPropertyChanged("CurrentPostcodeGemeente"); }
         }
 
         private RelayCommand saveCommand;
@@ -71,12 +71,12 @@ namespace Divisio.ViewModels
         {
             try
             {
-                var IsSaved = ObjLandService.Add(CurrentLand);
+                var IsSaved = ObjPostcodeGemeenteService.Add(CurrentPostcodeGemeente);
                 LoadData();
                 if (IsSaved)
-                    Message = "Land saved";
+                    Message = "Gemeente saved.";
                 else
-                    Message = "Het opslaan is mislukt";
+                    Message = "Opslaan is mislukt.";
             }
             catch (Exception ex)
             {
@@ -96,14 +96,14 @@ namespace Divisio.ViewModels
         {
             try
             {
-                var ObjLand = ObjLandService.Search(CurrentLand.IdLand);
-                if (ObjLand != null)
+                var ObjPostcodeGemeente = ObjPostcodeGemeenteService.Search(CurrentPostcodeGemeente.IdGemeente);
+                if (ObjPostcodeGemeente != null)
                 {
-                    CurrentLand = ObjLand;
+                    CurrentPostcodeGemeente = ObjPostcodeGemeente;
                 }
                 else
                 {
-                    Message = "Dit land werd niet gevonden.";
+                    Message = "Deze gemeente niet gevonden.";
                 }
             }
             catch (Exception ex)
@@ -124,10 +124,10 @@ namespace Divisio.ViewModels
         {
             try
             {
-                var IsUpdated = ObjLandService.Update(CurrentLand);
+                var IsUpdated = ObjPostcodeGemeenteService.Update(CurrentPostcodeGemeente);
                 if (IsUpdated)
                 {
-                    Message = "Land updated.";
+                    Message = "Gemeente updated";
                     LoadData();
                 }
                 else
@@ -156,15 +156,15 @@ namespace Divisio.ViewModels
         {
             try
             {
-                var IsDeleted = ObjLandService.Delete(CurrentLand.IdLand);
+                var IsDeleted = ObjPostcodeGemeenteService.Delete(CurrentPostcodeGemeente.IdGemeente);
                 if (IsDeleted)
                 {
-                    Message = "Land deleted";
+                    Message = "Gemeente verwijderd.";
                     LoadData();
                 }
                 else
                 {
-                    Message = "Land verwijderen is mislukt.";
+                    Message = "Gemeente is niet verwijderd.";
                 }
             }
             catch (Exception ex)

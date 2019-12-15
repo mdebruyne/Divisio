@@ -10,7 +10,7 @@ using System.Collections.ObjectModel;
 
 namespace Divisio.ViewModels
 {
-    public class LandViewModel : INotifyPropertyChanged
+    public class ProvincieViewModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged_Implementation
         public event PropertyChangedEventHandler PropertyChanged;
@@ -21,12 +21,12 @@ namespace Divisio.ViewModels
         }
         #endregion
 
-        LandService ObjLandService;
-        public LandViewModel()
+        ProvincieService ObjProvincieService;
+        public ProvincieViewModel()
         {
-            ObjLandService = new LandService();
+            ObjProvincieService = new ProvincieService();
             LoadData();
-            CurrentLand = new LandModel();
+            CurrentProvincie = new ProvincieModel();
             saveCommand = new RelayCommand(Save);
             searchCommand = new RelayCommand(Search);
             updateCommand = new RelayCommand(Update);
@@ -41,24 +41,24 @@ namespace Divisio.ViewModels
         }
 
         #region DisplayOperation
-        private ObservableCollection<LandModel> landList;
-        public ObservableCollection<LandModel> LandList
+        private ObservableCollection<ProvincieModel> provincieList;
+        public ObservableCollection<ProvincieModel> ProvincieList
         {
-            get { return landList; }
-            set { landList = value; OnPropertyChanged("LandList"); }
+            get { return provincieList; }
+            set { provincieList = value; OnPropertyChanged("ProvincieList"); }
         }
         private void LoadData()
         {
-            LandList = new ObservableCollection<LandModel>(ObjLandService.GetAll());
+            ProvincieList = new ObservableCollection<ProvincieModel>(ObjProvincieService.GetAll());
         }
         #endregion
 
         #region SaveOperation
-        private LandModel currentLand;
-        public LandModel CurrentLand
+        private ProvincieModel currentProvincie;
+        public ProvincieModel CurrentProvincie
         {
-            get { return currentLand; }
-            set { currentLand = value; OnPropertyChanged("CurrentLand"); }
+            get { return currentProvincie; }
+            set { currentProvincie = value; OnPropertyChanged("CurrentProvincie"); }
         }
 
         private RelayCommand saveCommand;
@@ -71,10 +71,10 @@ namespace Divisio.ViewModels
         {
             try
             {
-                var IsSaved = ObjLandService.Add(CurrentLand);
+                var IsSaved = ObjProvincieService.Add(CurrentProvincie);
                 LoadData();
                 if (IsSaved)
-                    Message = "Land saved";
+                    Message = "Provincie saved";
                 else
                     Message = "Het opslaan is mislukt";
             }
@@ -96,14 +96,14 @@ namespace Divisio.ViewModels
         {
             try
             {
-                var ObjLand = ObjLandService.Search(CurrentLand.IdLand);
-                if (ObjLand != null)
+                var ObjProvincie = ObjProvincieService.Search(CurrentProvincie.IdProvincie);
+                if (ObjProvincie != null)
                 {
-                    CurrentLand = ObjLand;
+                    CurrentProvincie = ObjProvincie;
                 }
                 else
                 {
-                    Message = "Dit land werd niet gevonden.";
+                    Message = "Deze provincie werd niet gevonden.";
                 }
             }
             catch (Exception ex)
@@ -124,10 +124,10 @@ namespace Divisio.ViewModels
         {
             try
             {
-                var IsUpdated = ObjLandService.Update(CurrentLand);
+                var IsUpdated = ObjProvincieService.Update(CurrentProvincie);
                 if (IsUpdated)
                 {
-                    Message = "Land updated.";
+                    Message = "Provincie updated.";
                     LoadData();
                 }
                 else
@@ -156,15 +156,15 @@ namespace Divisio.ViewModels
         {
             try
             {
-                var IsDeleted = ObjLandService.Delete(CurrentLand.IdLand);
+                var IsDeleted = ObjProvincieService.Delete(CurrentProvincie.IdProvincie);
                 if (IsDeleted)
                 {
-                    Message = "Land deleted";
+                    Message = "Provincie deleted";
                     LoadData();
                 }
                 else
                 {
-                    Message = "Land verwijderen is mislukt.";
+                    Message = "Provincie verwijderen is mislukt.";
                 }
             }
             catch (Exception ex)

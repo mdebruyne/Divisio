@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a6f2430b9bbd4c77aa60ff8fa5659c20" Name="Diagram1">
+        <EntityTypeShape EntityType="DivisioModel.accounts" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DivisioModel.accountType" Width="1.5" PointX="7.5" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DivisioModel.algemene_groepen" Width="1.5" PointX="12" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DivisioModel.categorie" Width="1.5" PointX="12.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DivisioModel.contactlijst" Width="1.5" PointX="12" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DivisioModel.groepen" Width="1.5" PointX="14.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DivisioModel.items" Width="1.5" PointX="15" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="DivisioModel.land" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DivisioModel.lening" Width="1.5" PointX="17.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DivisioModel.postcodeGemeente" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DivisioModel.provincie" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DivisioModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DivisioModel.toestand" Width="1.5" PointX="12.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="DivisioModel.users" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="DivisioModel.FK_accounts_users" ManuallyRouted="false" />
+        <AssociationConnector Association="DivisioModel.FK_accountType" ManuallyRouted="false" />
+        <AssociationConnector Association="DivisioModel.FK_algemene_groepen_accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="DivisioModel.FK_IdFriend" ManuallyRouted="false" />
+        <AssociationConnector Association="DivisioModel.FK_IdOwner" ManuallyRouted="false" />
+        <AssociationConnector Association="DivisioModel.FK_items_accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="DivisioModel.FK_lening_account" ManuallyRouted="false" />
+        <AssociationConnector Association="DivisioModel.FK_accounts_algemene_groepen" ManuallyRouted="false" />
+        <AssociationConnector Association="DivisioModel.FK_items_toestand" ManuallyRouted="false" />
+        <AssociationConnector Association="DivisioModel.FK_lening_item" ManuallyRouted="false" />
+        <AssociationConnector Association="DivisioModel.FK_Provincie_Land" ManuallyRouted="false" />
+        <AssociationConnector Association="DivisioModel.FK_PostcodeGemeente_Provincie" ManuallyRouted="false" />
+        <AssociationConnector Association="DivisioModel.FK_users_postcodeGemeent" ManuallyRouted="false" />
+        <AssociationConnector Association="DivisioModel.categorie_has_items" ManuallyRouted="false" />
+        <AssociationConnector Association="DivisioModel.contactlijst_has_groepen" ManuallyRouted="false" />
+        <AssociationConnector Association="DivisioModel.item_has_groepen" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

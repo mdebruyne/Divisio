@@ -1,0 +1,1088 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DivisioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="accounts">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+          </Key>
+          <Property Name="IdAccount" Type="int" Nullable="false" />
+          <Property Name="Usernaam" Type="varchar" MaxLength="50" />
+          <Property Name="Paswoord" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="60" />
+          <Property Name="Actief" Type="tinyint" />
+          <Property Name="AccountType_IdAccountType" Type="int" Nullable="false" />
+          <Property Name="Users_IdUser" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="accountType">
+          <Key>
+            <PropertyRef Name="IdAccountType" />
+          </Key>
+          <Property Name="IdAccountType" Type="int" Nullable="false" />
+          <Property Name="TypeAccount" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="algemene_groepen">
+          <Key>
+            <PropertyRef Name="Accounts_IdAccount" />
+            <PropertyRef Name="Groepen_IdGroep" />
+          </Key>
+          <Property Name="Accounts_IdAccount" Type="int" Nullable="false" />
+          <Property Name="Groepen_IdGroep" Type="int" Nullable="false" />
+          <Property Name="Info" Type="text" />
+        </EntityType>
+        <EntityType Name="categorie">
+          <Key>
+            <PropertyRef Name="IdCategorie" />
+          </Key>
+          <Property Name="IdCategorie" Type="int" Nullable="false" />
+          <Property Name="Categorie" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="categorie_has_items">
+          <Key>
+            <PropertyRef Name="Categorie_IdCategorie" />
+            <PropertyRef Name="Items_IdItem" />
+          </Key>
+          <Property Name="Categorie_IdCategorie" Type="int" Nullable="false" />
+          <Property Name="Items_IdItem" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="contactlijst">
+          <Key>
+            <PropertyRef Name="IdOwner" />
+            <PropertyRef Name="IdFriendOfOwner" />
+          </Key>
+          <Property Name="IdOwner" Type="int" Nullable="false" />
+          <Property Name="IdFriendOfOwner" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="contactlijst_has_groepen">
+          <Key>
+            <PropertyRef Name="Contactlijst_IdOwner" />
+            <PropertyRef Name="ContactLijst_IdFriendOfOwner" />
+            <PropertyRef Name="Groepen_IdGroepen" />
+          </Key>
+          <Property Name="Contactlijst_IdOwner" Type="int" Nullable="false" />
+          <Property Name="ContactLijst_IdFriendOfOwner" Type="int" Nullable="false" />
+          <Property Name="Groepen_IdGroepen" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="groepen">
+          <Key>
+            <PropertyRef Name="IdGroep" />
+          </Key>
+          <Property Name="IdGroep" Type="int" Nullable="false" />
+          <Property Name="GroepNaam" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="item_has_groepen">
+          <Key>
+            <PropertyRef Name="Items_IdItem" />
+            <PropertyRef Name="Groepen_IdGroep" />
+          </Key>
+          <Property Name="Items_IdItem" Type="int" Nullable="false" />
+          <Property Name="Groepen_IdGroep" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="items">
+          <Key>
+            <PropertyRef Name="IdItem" />
+          </Key>
+          <Property Name="IdItem" Type="int" Nullable="false" />
+          <Property Name="ItemNaam" Type="varchar" MaxLength="45" />
+          <Property Name="Beschrijving" Type="text" />
+          <Property Name="Beschikbaar" Type="tinyint" Nullable="false" />
+          <Property Name="Foto_Path" Type="nvarchar" MaxLength="500" />
+          <Property Name="Accounts_IdAccount" Type="int" />
+          <Property Name="Toestand_IdToestand" Type="int" />
+        </EntityType>
+        <EntityType Name="land">
+          <Key>
+            <PropertyRef Name="IdLand" />
+          </Key>
+          <Property Name="IdLand" Type="int" Nullable="false" />
+          <Property Name="land" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="lening">
+          <Key>
+            <PropertyRef Name="IdLening" />
+          </Key>
+          <Property Name="IdLening" Type="int" Nullable="false" />
+          <Property Name="Begindatum" Type="date" Nullable="false" />
+          <Property Name="Einddatum" Type="date" />
+          <Property Name="Opmerking" Type="text" />
+          <Property Name="Beoordeling" Type="float" />
+          <Property Name="Accounts_IdAccount" Type="int" />
+          <Property Name="Items_IdItem" Type="int" />
+        </EntityType>
+        <EntityType Name="postcodeGemeente">
+          <Key>
+            <PropertyRef Name="IdGemeente" />
+          </Key>
+          <Property Name="Postcode" Type="varchar" MaxLength="30" />
+          <Property Name="Gemeente" Type="varchar" MaxLength="45" />
+          <Property Name="IdGemeente" Type="int" Nullable="false" />
+          <Property Name="Provincie_IdProvincie" Type="int" />
+        </EntityType>
+        <EntityType Name="provincie">
+          <Key>
+            <PropertyRef Name="Idprovincie" />
+          </Key>
+          <Property Name="Idprovincie" Type="int" Nullable="false" />
+          <Property Name="Provincie" Type="varchar" MaxLength="50" />
+          <Property Name="Land_IdLand" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="toestand">
+          <Key>
+            <PropertyRef Name="IdToestand" />
+          </Key>
+          <Property Name="IdToestand" Type="int" Nullable="false" />
+          <Property Name="Toestand" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="Naam" Type="varchar" MaxLength="50" />
+          <Property Name="Voornaam" Type="varchar" MaxLength="45" />
+          <Property Name="Straat" Type="varchar" MaxLength="50" />
+          <Property Name="Huisnummer" Type="varchar" MaxLength="10" />
+          <Property Name="postcodeGemeente_IdGemeente" Type="int" />
+        </EntityType>
+        <Association Name="FK_accounts_algemene_groepen">
+          <End Role="groepen" Type="Self.groepen" Multiplicity="1" />
+          <End Role="algemene_groepen" Type="Self.algemene_groepen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groepen">
+              <PropertyRef Name="IdGroep" />
+            </Principal>
+            <Dependent Role="algemene_groepen">
+              <PropertyRef Name="Groepen_IdGroep" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_accounts_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="accounts">
+              <PropertyRef Name="Users_IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_accountType">
+          <End Role="accountType" Type="Self.accountType" Multiplicity="1" />
+          <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accountType">
+              <PropertyRef Name="IdAccountType" />
+            </Principal>
+            <Dependent Role="accounts">
+              <PropertyRef Name="AccountType_IdAccountType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_algemene_groepen_accounts">
+          <End Role="accounts" Type="Self.accounts" Multiplicity="1" />
+          <End Role="algemene_groepen" Type="Self.algemene_groepen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="algemene_groepen">
+              <PropertyRef Name="Accounts_IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_categorie_has_items_categorie">
+          <End Role="categorie" Type="Self.categorie" Multiplicity="1" />
+          <End Role="categorie_has_items" Type="Self.categorie_has_items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorie">
+              <PropertyRef Name="IdCategorie" />
+            </Principal>
+            <Dependent Role="categorie_has_items">
+              <PropertyRef Name="Categorie_IdCategorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_categorie_has_items_items">
+          <End Role="items" Type="Self.items" Multiplicity="1" />
+          <End Role="categorie_has_items" Type="Self.categorie_has_items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="items">
+              <PropertyRef Name="IdItem" />
+            </Principal>
+            <Dependent Role="categorie_has_items">
+              <PropertyRef Name="Items_IdItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_contactlijst_has_groepen_contactlijst">
+          <End Role="contactlijst" Type="Self.contactlijst" Multiplicity="1" />
+          <End Role="contactlijst_has_groepen" Type="Self.contactlijst_has_groepen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contactlijst">
+              <PropertyRef Name="IdOwner" />
+              <PropertyRef Name="IdFriendOfOwner" />
+            </Principal>
+            <Dependent Role="contactlijst_has_groepen">
+              <PropertyRef Name="Contactlijst_IdOwner" />
+              <PropertyRef Name="ContactLijst_IdFriendOfOwner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_contactlijst_has_groepen_groepen">
+          <End Role="groepen" Type="Self.groepen" Multiplicity="1" />
+          <End Role="contactlijst_has_groepen" Type="Self.contactlijst_has_groepen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groepen">
+              <PropertyRef Name="IdGroep" />
+            </Principal>
+            <Dependent Role="contactlijst_has_groepen">
+              <PropertyRef Name="Groepen_IdGroepen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdFriend">
+          <End Role="accounts" Type="Self.accounts" Multiplicity="1" />
+          <End Role="contactlijst" Type="Self.contactlijst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="contactlijst">
+              <PropertyRef Name="IdFriendOfOwner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdOwner">
+          <End Role="accounts" Type="Self.accounts" Multiplicity="1" />
+          <End Role="contactlijst" Type="Self.contactlijst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="contactlijst">
+              <PropertyRef Name="IdOwner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_has_groepen_item">
+          <End Role="items" Type="Self.items" Multiplicity="1" />
+          <End Role="item_has_groepen" Type="Self.item_has_groepen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="items">
+              <PropertyRef Name="IdItem" />
+            </Principal>
+            <Dependent Role="item_has_groepen">
+              <PropertyRef Name="Items_IdItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_has_groepen_item_groep">
+          <End Role="groepen" Type="Self.groepen" Multiplicity="1" />
+          <End Role="item_has_groepen" Type="Self.item_has_groepen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groepen">
+              <PropertyRef Name="IdGroep" />
+            </Principal>
+            <Dependent Role="item_has_groepen">
+              <PropertyRef Name="Groepen_IdGroep" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_items_accounts">
+          <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
+          <End Role="items" Type="Self.items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="items">
+              <PropertyRef Name="Accounts_IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_items_toestand">
+          <End Role="toestand" Type="Self.toestand" Multiplicity="0..1" />
+          <End Role="items" Type="Self.items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="toestand">
+              <PropertyRef Name="IdToestand" />
+            </Principal>
+            <Dependent Role="items">
+              <PropertyRef Name="Toestand_IdToestand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lening_account">
+          <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
+          <End Role="lening" Type="Self.lening" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="lening">
+              <PropertyRef Name="Accounts_IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lening_item">
+          <End Role="items" Type="Self.items" Multiplicity="0..1" />
+          <End Role="lening" Type="Self.lening" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="items">
+              <PropertyRef Name="IdItem" />
+            </Principal>
+            <Dependent Role="lening">
+              <PropertyRef Name="Items_IdItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostcodeGemeente_Provincie">
+          <End Role="provincie" Type="Self.provincie" Multiplicity="0..1" />
+          <End Role="postcodeGemeente" Type="Self.postcodeGemeente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="provincie">
+              <PropertyRef Name="Idprovincie" />
+            </Principal>
+            <Dependent Role="postcodeGemeente">
+              <PropertyRef Name="Provincie_IdProvincie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provincie_Land">
+          <End Role="land" Type="Self.land" Multiplicity="0..1" />
+          <End Role="provincie" Type="Self.provincie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="land">
+              <PropertyRef Name="IdLand" />
+            </Principal>
+            <Dependent Role="provincie">
+              <PropertyRef Name="Land_IdLand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_postcodeGemeent">
+          <End Role="postcodeGemeente" Type="Self.postcodeGemeente" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="postcodeGemeente">
+              <PropertyRef Name="IdGemeente" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="postcodeGemeente_IdGemeente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DivisioModelStoreContainer">
+          <EntitySet Name="accounts" EntityType="Self.accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="accountType" EntityType="Self.accountType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="algemene_groepen" EntityType="Self.algemene_groepen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="categorie" EntityType="Self.categorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="categorie_has_items" EntityType="Self.categorie_has_items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="contactlijst" EntityType="Self.contactlijst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="contactlijst_has_groepen" EntityType="Self.contactlijst_has_groepen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="groepen" EntityType="Self.groepen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="item_has_groepen" EntityType="Self.item_has_groepen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="items" EntityType="Self.items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="land" EntityType="Self.land" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lening" EntityType="Self.lening" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="postcodeGemeente" EntityType="Self.postcodeGemeente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="provincie" EntityType="Self.provincie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="toestand" EntityType="Self.toestand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_accounts_algemene_groepen" Association="Self.FK_accounts_algemene_groepen">
+            <End Role="groepen" EntitySet="groepen" />
+            <End Role="algemene_groepen" EntitySet="algemene_groepen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_accounts_users" Association="Self.FK_accounts_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="accounts" EntitySet="accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_accountType" Association="Self.FK_accountType">
+            <End Role="accountType" EntitySet="accountType" />
+            <End Role="accounts" EntitySet="accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_algemene_groepen_accounts" Association="Self.FK_algemene_groepen_accounts">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="algemene_groepen" EntitySet="algemene_groepen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_categorie_has_items_categorie" Association="Self.FK_categorie_has_items_categorie">
+            <End Role="categorie" EntitySet="categorie" />
+            <End Role="categorie_has_items" EntitySet="categorie_has_items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_categorie_has_items_items" Association="Self.FK_categorie_has_items_items">
+            <End Role="items" EntitySet="items" />
+            <End Role="categorie_has_items" EntitySet="categorie_has_items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_contactlijst_has_groepen_contactlijst" Association="Self.FK_contactlijst_has_groepen_contactlijst">
+            <End Role="contactlijst" EntitySet="contactlijst" />
+            <End Role="contactlijst_has_groepen" EntitySet="contactlijst_has_groepen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_contactlijst_has_groepen_groepen" Association="Self.FK_contactlijst_has_groepen_groepen">
+            <End Role="groepen" EntitySet="groepen" />
+            <End Role="contactlijst_has_groepen" EntitySet="contactlijst_has_groepen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdFriend" Association="Self.FK_IdFriend">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="contactlijst" EntitySet="contactlijst" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdOwner" Association="Self.FK_IdOwner">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="contactlijst" EntitySet="contactlijst" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_has_groepen_item" Association="Self.FK_item_has_groepen_item">
+            <End Role="items" EntitySet="items" />
+            <End Role="item_has_groepen" EntitySet="item_has_groepen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_has_groepen_item_groep" Association="Self.FK_item_has_groepen_item_groep">
+            <End Role="groepen" EntitySet="groepen" />
+            <End Role="item_has_groepen" EntitySet="item_has_groepen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_items_accounts" Association="Self.FK_items_accounts">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="items" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_items_toestand" Association="Self.FK_items_toestand">
+            <End Role="toestand" EntitySet="toestand" />
+            <End Role="items" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lening_account" Association="Self.FK_lening_account">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="lening" EntitySet="lening" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lening_item" Association="Self.FK_lening_item">
+            <End Role="items" EntitySet="items" />
+            <End Role="lening" EntitySet="lening" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostcodeGemeente_Provincie" Association="Self.FK_PostcodeGemeente_Provincie">
+            <End Role="provincie" EntitySet="provincie" />
+            <End Role="postcodeGemeente" EntitySet="postcodeGemeente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provincie_Land" Association="Self.FK_Provincie_Land">
+            <End Role="land" EntitySet="land" />
+            <End Role="provincie" EntitySet="provincie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_postcodeGemeent" Association="Self.FK_users_postcodeGemeent">
+            <End Role="postcodeGemeente" EntitySet="postcodeGemeente" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DivisioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="accounts">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+          </Key>
+          <Property Name="IdAccount" Type="Int32" Nullable="false" />
+          <Property Name="Usernaam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Paswoord" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="Byte" />
+          <Property Name="AccountType_IdAccountType" Type="Int32" Nullable="false" />
+          <Property Name="Users_IdUser" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.FK_accounts_users" FromRole="accounts" ToRole="users" />
+          <NavigationProperty Name="accountType" Relationship="Self.FK_accountType" FromRole="accounts" ToRole="accountType" />
+          <NavigationProperty Name="algemene_groepen" Relationship="Self.FK_algemene_groepen_accounts" FromRole="accounts" ToRole="algemene_groepen" />
+          <NavigationProperty Name="contactlijst" Relationship="Self.FK_IdFriend" FromRole="accounts" ToRole="contactlijst" />
+          <NavigationProperty Name="contactlijst1" Relationship="Self.FK_IdOwner" FromRole="accounts" ToRole="contactlijst" />
+          <NavigationProperty Name="items" Relationship="Self.FK_items_accounts" FromRole="accounts" ToRole="items" />
+          <NavigationProperty Name="lening" Relationship="Self.FK_lening_account" FromRole="accounts" ToRole="lening" />
+        </EntityType>
+        <EntityType Name="accountType">
+          <Key>
+            <PropertyRef Name="IdAccountType" />
+          </Key>
+          <Property Name="IdAccountType" Type="Int32" Nullable="false" />
+          <Property Name="TypeAccount" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="accounts" Relationship="Self.FK_accountType" FromRole="accountType" ToRole="accounts" />
+        </EntityType>
+        <EntityType Name="algemene_groepen">
+          <Key>
+            <PropertyRef Name="Accounts_IdAccount" />
+            <PropertyRef Name="Groepen_IdGroep" />
+          </Key>
+          <Property Name="Accounts_IdAccount" Type="Int32" Nullable="false" />
+          <Property Name="Groepen_IdGroep" Type="Int32" Nullable="false" />
+          <Property Name="Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="accounts" Relationship="Self.FK_algemene_groepen_accounts" FromRole="algemene_groepen" ToRole="accounts" />
+          <NavigationProperty Name="groepen" Relationship="Self.FK_accounts_algemene_groepen" FromRole="algemene_groepen" ToRole="groepen" />
+        </EntityType>
+        <EntityType Name="categorie">
+          <Key>
+            <PropertyRef Name="IdCategorie" />
+          </Key>
+          <Property Name="IdCategorie" Type="Int32" Nullable="false" />
+          <Property Name="Categorie1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="items" Relationship="Self.categorie_has_items" FromRole="categorie" ToRole="items" />
+        </EntityType>
+        <EntityType Name="contactlijst">
+          <Key>
+            <PropertyRef Name="IdOwner" />
+            <PropertyRef Name="IdFriendOfOwner" />
+          </Key>
+          <Property Name="IdOwner" Type="Int32" Nullable="false" />
+          <Property Name="IdFriendOfOwner" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="accounts" Relationship="Self.FK_IdFriend" FromRole="contactlijst" ToRole="accounts" />
+          <NavigationProperty Name="accounts1" Relationship="Self.FK_IdOwner" FromRole="contactlijst" ToRole="accounts" />
+          <NavigationProperty Name="groepen" Relationship="Self.contactlijst_has_groepen" FromRole="contactlijst" ToRole="groepen" />
+        </EntityType>
+        <EntityType Name="groepen">
+          <Key>
+            <PropertyRef Name="IdGroep" />
+          </Key>
+          <Property Name="IdGroep" Type="Int32" Nullable="false" />
+          <Property Name="GroepNaam" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="algemene_groepen" Relationship="Self.FK_accounts_algemene_groepen" FromRole="groepen" ToRole="algemene_groepen" />
+          <NavigationProperty Name="contactlijst" Relationship="Self.contactlijst_has_groepen" FromRole="groepen" ToRole="contactlijst" />
+          <NavigationProperty Name="items" Relationship="Self.item_has_groepen" FromRole="groepen" ToRole="items" />
+        </EntityType>
+        <EntityType Name="items">
+          <Key>
+            <PropertyRef Name="IdItem" />
+          </Key>
+          <Property Name="IdItem" Type="Int32" Nullable="false" />
+          <Property Name="ItemNaam" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Beschrijving" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Beschikbaar" Type="Byte" Nullable="false" />
+          <Property Name="Foto_Path" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Accounts_IdAccount" Type="Int32" />
+          <Property Name="Toestand_IdToestand" Type="Int32" />
+          <NavigationProperty Name="accounts" Relationship="Self.FK_items_accounts" FromRole="items" ToRole="accounts" />
+          <NavigationProperty Name="toestand" Relationship="Self.FK_items_toestand" FromRole="items" ToRole="toestand" />
+          <NavigationProperty Name="lening" Relationship="Self.FK_lening_item" FromRole="items" ToRole="lening" />
+          <NavigationProperty Name="categorie" Relationship="Self.categorie_has_items" FromRole="items" ToRole="categorie" />
+          <NavigationProperty Name="groepen" Relationship="Self.item_has_groepen" FromRole="items" ToRole="groepen" />
+        </EntityType>
+        <EntityType Name="land">
+          <Key>
+            <PropertyRef Name="IdLand" />
+          </Key>
+          <Property Name="IdLand" Type="Int32" Nullable="false" />
+          <Property Name="land1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="provincie" Relationship="Self.FK_Provincie_Land" FromRole="land" ToRole="provincie" />
+        </EntityType>
+        <EntityType Name="lening">
+          <Key>
+            <PropertyRef Name="IdLening" />
+          </Key>
+          <Property Name="IdLening" Type="Int32" Nullable="false" />
+          <Property Name="Begindatum" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Einddatum" Type="DateTime" Precision="0" />
+          <Property Name="Opmerking" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Beoordeling" Type="Double" />
+          <Property Name="Accounts_IdAccount" Type="Int32" />
+          <Property Name="Items_IdItem" Type="Int32" />
+          <NavigationProperty Name="accounts" Relationship="Self.FK_lening_account" FromRole="lening" ToRole="accounts" />
+          <NavigationProperty Name="items" Relationship="Self.FK_lening_item" FromRole="lening" ToRole="items" />
+        </EntityType>
+        <EntityType Name="postcodeGemeente">
+          <Key>
+            <PropertyRef Name="IdGemeente" />
+          </Key>
+          <Property Name="Postcode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Gemeente" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="IdGemeente" Type="Int32" Nullable="false" />
+          <Property Name="Provincie_IdProvincie" Type="Int32" />
+          <NavigationProperty Name="provincie" Relationship="Self.FK_PostcodeGemeente_Provincie" FromRole="postcodeGemeente" ToRole="provincie" />
+          <NavigationProperty Name="users" Relationship="Self.FK_users_postcodeGemeent" FromRole="postcodeGemeente" ToRole="users" />
+        </EntityType>
+        <EntityType Name="provincie">
+          <Key>
+            <PropertyRef Name="Idprovincie" />
+          </Key>
+          <Property Name="Idprovincie" Type="Int32" Nullable="false" />
+          <Property Name="Provincie1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Land_IdLand" Type="Int32" />
+          <NavigationProperty Name="land" Relationship="Self.FK_Provincie_Land" FromRole="provincie" ToRole="land" />
+          <NavigationProperty Name="postcodeGemeente" Relationship="Self.FK_PostcodeGemeente_Provincie" FromRole="provincie" ToRole="postcodeGemeente" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="toestand">
+          <Key>
+            <PropertyRef Name="IdToestand" />
+          </Key>
+          <Property Name="IdToestand" Type="Int32" Nullable="false" />
+          <Property Name="Toestand1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="items" Relationship="Self.FK_items_toestand" FromRole="toestand" ToRole="items" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="Naam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Voornaam" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Straat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Huisnummer" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="postcodeGemeente_IdGemeente" Type="Int32" />
+          <NavigationProperty Name="accounts" Relationship="Self.FK_accounts_users" FromRole="users" ToRole="accounts" />
+          <NavigationProperty Name="postcodeGemeente" Relationship="Self.FK_users_postcodeGemeent" FromRole="users" ToRole="postcodeGemeente" />
+        </EntityType>
+        <Association Name="FK_accounts_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="accounts">
+              <PropertyRef Name="Users_IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_accountType">
+          <End Role="accountType" Type="Self.accountType" Multiplicity="1" />
+          <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accountType">
+              <PropertyRef Name="IdAccountType" />
+            </Principal>
+            <Dependent Role="accounts">
+              <PropertyRef Name="AccountType_IdAccountType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_algemene_groepen_accounts">
+          <End Role="accounts" Type="Self.accounts" Multiplicity="1" />
+          <End Role="algemene_groepen" Type="Self.algemene_groepen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="algemene_groepen">
+              <PropertyRef Name="Accounts_IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdFriend">
+          <End Role="accounts" Type="Self.accounts" Multiplicity="1" />
+          <End Role="contactlijst" Type="Self.contactlijst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="contactlijst">
+              <PropertyRef Name="IdFriendOfOwner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdOwner">
+          <End Role="accounts" Type="Self.accounts" Multiplicity="1" />
+          <End Role="contactlijst" Type="Self.contactlijst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="contactlijst">
+              <PropertyRef Name="IdOwner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_items_accounts">
+          <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
+          <End Role="items" Type="Self.items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="items">
+              <PropertyRef Name="Accounts_IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lening_account">
+          <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
+          <End Role="lening" Type="Self.lening" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="lening">
+              <PropertyRef Name="Accounts_IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_accounts_algemene_groepen">
+          <End Role="groepen" Type="Self.groepen" Multiplicity="1" />
+          <End Role="algemene_groepen" Type="Self.algemene_groepen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groepen">
+              <PropertyRef Name="IdGroep" />
+            </Principal>
+            <Dependent Role="algemene_groepen">
+              <PropertyRef Name="Groepen_IdGroep" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_items_toestand">
+          <End Role="toestand" Type="Self.toestand" Multiplicity="0..1" />
+          <End Role="items" Type="Self.items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="toestand">
+              <PropertyRef Name="IdToestand" />
+            </Principal>
+            <Dependent Role="items">
+              <PropertyRef Name="Toestand_IdToestand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lening_item">
+          <End Role="items" Type="Self.items" Multiplicity="0..1" />
+          <End Role="lening" Type="Self.lening" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="items">
+              <PropertyRef Name="IdItem" />
+            </Principal>
+            <Dependent Role="lening">
+              <PropertyRef Name="Items_IdItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provincie_Land">
+          <End Role="land" Type="Self.land" Multiplicity="0..1" />
+          <End Role="provincie" Type="Self.provincie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="land">
+              <PropertyRef Name="IdLand" />
+            </Principal>
+            <Dependent Role="provincie">
+              <PropertyRef Name="Land_IdLand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostcodeGemeente_Provincie">
+          <End Role="provincie" Type="Self.provincie" Multiplicity="0..1" />
+          <End Role="postcodeGemeente" Type="Self.postcodeGemeente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="provincie">
+              <PropertyRef Name="Idprovincie" />
+            </Principal>
+            <Dependent Role="postcodeGemeente">
+              <PropertyRef Name="Provincie_IdProvincie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_postcodeGemeent">
+          <End Role="postcodeGemeente" Type="Self.postcodeGemeente" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="postcodeGemeente">
+              <PropertyRef Name="IdGemeente" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="postcodeGemeente_IdGemeente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="categorie_has_items">
+          <End Role="categorie" Type="Self.categorie" Multiplicity="*" />
+          <End Role="items" Type="Self.items" Multiplicity="*" />
+        </Association>
+        <Association Name="contactlijst_has_groepen">
+          <End Role="contactlijst" Type="Self.contactlijst" Multiplicity="*" />
+          <End Role="groepen" Type="Self.groepen" Multiplicity="*" />
+        </Association>
+        <Association Name="item_has_groepen">
+          <End Role="items" Type="Self.items" Multiplicity="*" />
+          <End Role="groepen" Type="Self.groepen" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="DivisioEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accounts" EntityType="Self.accounts" />
+          <EntitySet Name="accountType" EntityType="Self.accountType" />
+          <EntitySet Name="algemene_groepen" EntityType="Self.algemene_groepen" />
+          <EntitySet Name="categorie" EntityType="Self.categorie" />
+          <EntitySet Name="contactlijst" EntityType="Self.contactlijst" />
+          <EntitySet Name="groepen" EntityType="Self.groepen" />
+          <EntitySet Name="items" EntityType="Self.items" />
+          <EntitySet Name="land" EntityType="Self.land" />
+          <EntitySet Name="lening" EntityType="Self.lening" />
+          <EntitySet Name="postcodeGemeente" EntityType="Self.postcodeGemeente" />
+          <EntitySet Name="provincie" EntityType="Self.provincie" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="toestand" EntityType="Self.toestand" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <AssociationSet Name="FK_accounts_users" Association="Self.FK_accounts_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="accounts" EntitySet="accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_accountType" Association="Self.FK_accountType">
+            <End Role="accountType" EntitySet="accountType" />
+            <End Role="accounts" EntitySet="accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_algemene_groepen_accounts" Association="Self.FK_algemene_groepen_accounts">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="algemene_groepen" EntitySet="algemene_groepen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdFriend" Association="Self.FK_IdFriend">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="contactlijst" EntitySet="contactlijst" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdOwner" Association="Self.FK_IdOwner">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="contactlijst" EntitySet="contactlijst" />
+          </AssociationSet>
+          <AssociationSet Name="FK_items_accounts" Association="Self.FK_items_accounts">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="items" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lening_account" Association="Self.FK_lening_account">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="lening" EntitySet="lening" />
+          </AssociationSet>
+          <AssociationSet Name="FK_accounts_algemene_groepen" Association="Self.FK_accounts_algemene_groepen">
+            <End Role="groepen" EntitySet="groepen" />
+            <End Role="algemene_groepen" EntitySet="algemene_groepen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_items_toestand" Association="Self.FK_items_toestand">
+            <End Role="toestand" EntitySet="toestand" />
+            <End Role="items" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lening_item" Association="Self.FK_lening_item">
+            <End Role="items" EntitySet="items" />
+            <End Role="lening" EntitySet="lening" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provincie_Land" Association="Self.FK_Provincie_Land">
+            <End Role="land" EntitySet="land" />
+            <End Role="provincie" EntitySet="provincie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostcodeGemeente_Provincie" Association="Self.FK_PostcodeGemeente_Provincie">
+            <End Role="provincie" EntitySet="provincie" />
+            <End Role="postcodeGemeente" EntitySet="postcodeGemeente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_postcodeGemeent" Association="Self.FK_users_postcodeGemeent">
+            <End Role="postcodeGemeente" EntitySet="postcodeGemeente" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="categorie_has_items" Association="Self.categorie_has_items">
+            <End Role="categorie" EntitySet="categorie" />
+            <End Role="items" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="contactlijst_has_groepen" Association="Self.contactlijst_has_groepen">
+            <End Role="contactlijst" EntitySet="contactlijst" />
+            <End Role="groepen" EntitySet="groepen" />
+          </AssociationSet>
+          <AssociationSet Name="item_has_groepen" Association="Self.item_has_groepen">
+            <End Role="items" EntitySet="items" />
+            <End Role="groepen" EntitySet="groepen" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DivisioModelStoreContainer" CdmEntityContainer="DivisioEntities">
+          <EntitySetMapping Name="accounts">
+            <EntityTypeMapping TypeName="DivisioModel.accounts">
+              <MappingFragment StoreEntitySet="accounts">
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="Usernaam" ColumnName="Usernaam" />
+                <ScalarProperty Name="Paswoord" ColumnName="Paswoord" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Actief" ColumnName="Actief" />
+                <ScalarProperty Name="AccountType_IdAccountType" ColumnName="AccountType_IdAccountType" />
+                <ScalarProperty Name="Users_IdUser" ColumnName="Users_IdUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="accountType">
+            <EntityTypeMapping TypeName="DivisioModel.accountType">
+              <MappingFragment StoreEntitySet="accountType">
+                <ScalarProperty Name="IdAccountType" ColumnName="IdAccountType" />
+                <ScalarProperty Name="TypeAccount" ColumnName="TypeAccount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="algemene_groepen">
+            <EntityTypeMapping TypeName="DivisioModel.algemene_groepen">
+              <MappingFragment StoreEntitySet="algemene_groepen">
+                <ScalarProperty Name="Accounts_IdAccount" ColumnName="Accounts_IdAccount" />
+                <ScalarProperty Name="Groepen_IdGroep" ColumnName="Groepen_IdGroep" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categorie">
+            <EntityTypeMapping TypeName="DivisioModel.categorie">
+              <MappingFragment StoreEntitySet="categorie">
+                <ScalarProperty Name="IdCategorie" ColumnName="IdCategorie" />
+                <ScalarProperty Name="Categorie1" ColumnName="Categorie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contactlijst">
+            <EntityTypeMapping TypeName="DivisioModel.contactlijst">
+              <MappingFragment StoreEntitySet="contactlijst">
+                <ScalarProperty Name="IdOwner" ColumnName="IdOwner" />
+                <ScalarProperty Name="IdFriendOfOwner" ColumnName="IdFriendOfOwner" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="groepen">
+            <EntityTypeMapping TypeName="DivisioModel.groepen">
+              <MappingFragment StoreEntitySet="groepen">
+                <ScalarProperty Name="IdGroep" ColumnName="IdGroep" />
+                <ScalarProperty Name="GroepNaam" ColumnName="GroepNaam" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="items">
+            <EntityTypeMapping TypeName="DivisioModel.items">
+              <MappingFragment StoreEntitySet="items">
+                <ScalarProperty Name="IdItem" ColumnName="IdItem" />
+                <ScalarProperty Name="ItemNaam" ColumnName="ItemNaam" />
+                <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
+                <ScalarProperty Name="Beschikbaar" ColumnName="Beschikbaar" />
+                <ScalarProperty Name="Foto_Path" ColumnName="Foto_Path" />
+                <ScalarProperty Name="Accounts_IdAccount" ColumnName="Accounts_IdAccount" />
+                <ScalarProperty Name="Toestand_IdToestand" ColumnName="Toestand_IdToestand" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="land">
+            <EntityTypeMapping TypeName="DivisioModel.land">
+              <MappingFragment StoreEntitySet="land">
+                <ScalarProperty Name="IdLand" ColumnName="IdLand" />
+                <ScalarProperty Name="land1" ColumnName="land" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lening">
+            <EntityTypeMapping TypeName="DivisioModel.lening">
+              <MappingFragment StoreEntitySet="lening">
+                <ScalarProperty Name="IdLening" ColumnName="IdLening" />
+                <ScalarProperty Name="Begindatum" ColumnName="Begindatum" />
+                <ScalarProperty Name="Einddatum" ColumnName="Einddatum" />
+                <ScalarProperty Name="Opmerking" ColumnName="Opmerking" />
+                <ScalarProperty Name="Beoordeling" ColumnName="Beoordeling" />
+                <ScalarProperty Name="Accounts_IdAccount" ColumnName="Accounts_IdAccount" />
+                <ScalarProperty Name="Items_IdItem" ColumnName="Items_IdItem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="postcodeGemeente">
+            <EntityTypeMapping TypeName="DivisioModel.postcodeGemeente">
+              <MappingFragment StoreEntitySet="postcodeGemeente">
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Gemeente" ColumnName="Gemeente" />
+                <ScalarProperty Name="IdGemeente" ColumnName="IdGemeente" />
+                <ScalarProperty Name="Provincie_IdProvincie" ColumnName="Provincie_IdProvincie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="provincie">
+            <EntityTypeMapping TypeName="DivisioModel.provincie">
+              <MappingFragment StoreEntitySet="provincie">
+                <ScalarProperty Name="Idprovincie" ColumnName="Idprovincie" />
+                <ScalarProperty Name="Provincie1" ColumnName="Provincie" />
+                <ScalarProperty Name="Land_IdLand" ColumnName="Land_IdLand" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DivisioModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="toestand">
+            <EntityTypeMapping TypeName="DivisioModel.toestand">
+              <MappingFragment StoreEntitySet="toestand">
+                <ScalarProperty Name="IdToestand" ColumnName="IdToestand" />
+                <ScalarProperty Name="Toestand1" ColumnName="Toestand" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="DivisioModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+                <ScalarProperty Name="Straat" ColumnName="Straat" />
+                <ScalarProperty Name="Huisnummer" ColumnName="Huisnummer" />
+                <ScalarProperty Name="postcodeGemeente_IdGemeente" ColumnName="postcodeGemeente_IdGemeente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="categorie_has_items" TypeName="DivisioModel.categorie_has_items" StoreEntitySet="categorie_has_items">
+            <EndProperty Name="categorie">
+              <ScalarProperty Name="IdCategorie" ColumnName="Categorie_IdCategorie" />
+            </EndProperty>
+            <EndProperty Name="items">
+              <ScalarProperty Name="IdItem" ColumnName="Items_IdItem" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="contactlijst_has_groepen" TypeName="DivisioModel.contactlijst_has_groepen" StoreEntitySet="contactlijst_has_groepen">
+            <EndProperty Name="contactlijst">
+              <ScalarProperty Name="IdOwner" ColumnName="Contactlijst_IdOwner" />
+              <ScalarProperty Name="IdFriendOfOwner" ColumnName="ContactLijst_IdFriendOfOwner" />
+            </EndProperty>
+            <EndProperty Name="groepen">
+              <ScalarProperty Name="IdGroep" ColumnName="Groepen_IdGroepen" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="item_has_groepen" TypeName="DivisioModel.item_has_groepen" StoreEntitySet="item_has_groepen">
+            <EndProperty Name="items">
+              <ScalarProperty Name="IdItem" ColumnName="Items_IdItem" />
+            </EndProperty>
+            <EndProperty Name="groepen">
+              <ScalarProperty Name="IdGroep" ColumnName="Groepen_IdGroep" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
